@@ -12,7 +12,7 @@ common_tags = {
 ########################
 #KMS Key
 #########################
-alias_name = "ATL-APAC-MUM-DTLK-PROD-ATHENA2-0-KMS-2"
+alias_name = "ATL-APAC-MUM-DIH-KMS-KEY-01"
 description = "Encryption key for EBS volumes"
 #deletion_window_in_days = 30
 
