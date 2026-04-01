@@ -41,6 +41,7 @@ resource "aws_kms_key" "this" {
       }
     ]
   })
+  tags = var.common_tags
 }
 
 resource "aws_kms_alias" "this" {
