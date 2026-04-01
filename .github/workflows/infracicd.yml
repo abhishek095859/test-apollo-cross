@@ -1,4 +1,4 @@
-name: "Athena2.0 infra pipeline"
+name: "1. Infrastructure"
 on:
   workflow_dispatch: 
 
@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 jobs:
-  terraform-deploy:
+  terraform-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,22 +16,16 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::313167085599:role/ATL-APAC-MUM-DTLK-PROD-TERRAFORM-IAAC-IAM-ROLE
+          role-to-assume: arn:aws:iam::185863138492:role/crossaccountb 
           aws-region: ap-south-1
 
       # 2. Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # 3. Run Terraform plan
-      - name: Terraform Plan
-        working-directory: ./prod
-        run: |
-          terraform init -backend-config="backend.hcl"
-          terraform plan
-
-      # 4. Run Terraform
+      # 3. Run Terraform
       - name: Terraform Apply
-        working-directory: ./prod
+        working-directory: ./global-resources
         run: |
-          terraform apply -auto-approve
+          terraform init -upgrade
+          terraform plan 
